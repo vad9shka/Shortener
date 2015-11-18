@@ -61,6 +61,13 @@ class RoutesController < ApplicationController
     end
   end
 
+
+  def get_full_link
+    # находим по короткой ссылке объект с полной и редиректим юзверя
+    route = Route.find_by_url_short(params[:short_url])
+    redirect_to route.url and return
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_route
@@ -72,3 +79,4 @@ class RoutesController < ApplicationController
       params.require(:route).permit(:url, :url_short)
     end
 end
+
